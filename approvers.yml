@@ -1,0 +1,18 @@
+#maintainers:
+#  type: static
+#  count: 1
+#  users:
+#    - "a.s.biryukov@tinkoff.ru"
+#    - "a.v.golikov@tinkoff.ru"
+#  default_reviewers:
+#    all_eligible: true
+#
+#settings:
+#  type: static
+#  count: 1
+#  users:
+#    - "a.s.biryukov@tinkoff.ru"
+#
+#  files:
+#    - "policy\\.yml"
+#    - "approvers\\.yml"

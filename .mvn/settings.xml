@@ -1,0 +1,9 @@
+<settings>
+    <mirrors>
+        <mirror>
+            <id>Central Proxy</id>
+            <url>https://artifactory.tcsbank.ru/artifactory/maven-all</url>
+            <mirrorOf>central</mirrorOf>
+        </mirror>
+    </mirrors>
+</settings>

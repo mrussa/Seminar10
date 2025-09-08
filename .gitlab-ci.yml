@@ -1,0 +1,22 @@
+stages:
+  - build
+
+build:
+  stage: build
+  image: docker-hosted.artifactory.tcsbank.ru/cicd-images/jdk-21:latest
+  variables:
+    MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+    MAVEN_IDS: central,snapshots
+  allow_failure: false
+  cache:
+    key: m2-30.11.2023
+    paths:
+      - .m2
+  only:
+    - merge_requests
+  services:
+    - name: docker-hosted.artifactory.tcsbank.ru/testops/kuber-api:latest
+  script:
+    - REVISION=$(grep -oP '(?<=<revision>).*?(?=</revision>)' pom.xml)
+    - echo REVISION=${REVISION} >> build.env
+    - mvn -T 2 package -Drevision="${REVISION}" -s .mvn/settings.xml

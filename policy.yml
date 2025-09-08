@@ -1,0 +1,30 @@
+## https://wiki.tcsbank.ru/pages/viewpage.action?pageId=720888709
+#
+#project:
+#  allow_merge_on_skipped_pipeline: false
+#  protected_branches:
+#    - 'master*'
+#  commit_template:
+#    merge: |-
+#      %{title} [Merge]
+#
+#      Merge branch '%{source_branch}' into '%{target_branch}'
+#
+#      %{issues}
+#
+#      See merge request %{reference}
+#    squash: "%{title} [Squash]"
+#    suggestion: "Apply %{suggestions_count} suggestion(s) to %{files_count}"
+#
+#merge_request:
+#  method: 'fast-forward'
+#  squash: 'always'
+#  enable_delete_branch: true
+#  resolve_outdated_diff_discussions: false
+#  allow_author_approval: false
+#  allow_commit_skip_approvals: true
+#  auto_merge: false
+#
+#push_rules:
+#  commit_message: 'JAVAPROF-\d+'
+#  branch_name: '(?:(?:JAVAPROF-\d+)|master)'
