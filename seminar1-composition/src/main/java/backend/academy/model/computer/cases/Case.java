@@ -17,12 +17,14 @@ public abstract class Case extends Component {
         return TYPE;
     }
 
-    public String getFormFactor(){
+    public String getFormFactor() {
         return formFactor;
     }
 
     @Override
     public String getSpecs() {
-        return STR."Case: \{getName()} | Form Factor: \{getFormFactor()} | Price: $\{getPrice()}";
+        return "Case: " + getName()
+               + " | Form Factor: " + getFormFactor()
+               + "| Price: " + getPrice();
     }
 }
