@@ -1,8 +1,5 @@
 package backend.academy.model.computer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Motherboard extends Component {
     public static final String TYPE = "MB";
     private final String socketType;
@@ -34,6 +31,9 @@ public class Motherboard extends Component {
 
     @Override
     public String getSpecs() {
-        return STR."Motherboard{name=\{getName()}, socketType='\{socketType}', maxRamSlots=\{maxRamSlots}}";
+        return "Motherboard{name=" + getName()
+               + ", socketType='" + getSocketType()
+               + "', maxRamSlots=" + maxRamSlots +
+               "}";
     }
 }

@@ -33,7 +33,7 @@ public class Main {
             //System.out.println("\nLoaded Computer Configuration:");
             //loadedComputer.printSpecs();
         } catch (Exception e) {
-            System.out.println(STR."Error: \{e.getMessage()}");
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }

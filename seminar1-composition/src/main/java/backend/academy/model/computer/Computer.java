@@ -3,9 +3,7 @@ package backend.academy.model.computer;
 import backend.academy.validators.HardwareValidator;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.StringJoiner;
 
 public class Computer implements Serializable {
@@ -19,7 +17,8 @@ public class Computer implements Serializable {
             components.add(component);
         } else {
             System.out.println(
-                STR."Component \{component.getName()} was not added because of the following reasons:\n\{result}"
+                "Component " + component.getName()
+                + " was not added because of the following reasons:\n" + result
             );
         }
     }

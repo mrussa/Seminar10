@@ -44,7 +44,8 @@ public class HardwareValidator {
         if (mbSocket == null || cpuSocket == null || Objects.equals(mbSocket, cpuSocket)) {
             return null;
         } else {
-            return STR."Incompatible components! Different socket types. MB has \{mbSocket} and CPU has \{cpuSocket}";
+            return "Incompatible components! Different socket types. MB has " + mbSocket
+                   + " and CPU has " + cpuSocket;
         }
     }
 
