@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>backend.academy</groupId>
-        <artifactId>2024</artifactId>
+        <artifactId>2025</artifactId>
         <version>${revision}</version>
     </parent>
 
