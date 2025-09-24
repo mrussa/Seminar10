@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>backend.academy</groupId>
-    <artifactId>2024</artifactId>
+    <artifactId>2025</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
@@ -82,7 +82,7 @@
 <!--        <module>seminar3</module>-->
 <!--        <module>seminar3-record</module>-->
 <!--        <module>seminar3-sealed</module>-->
-<!--        <module>seminar4</module>-->
+        <module>seminar4</module>
 <!--        <module>seminar5-api</module>-->
 <!--        <module>seminar5-arrays</module>-->
 <!--        <module>seminar5-library</module>-->
