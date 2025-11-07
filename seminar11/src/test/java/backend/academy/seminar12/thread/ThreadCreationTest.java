@@ -1,6 +1,6 @@
-package backend.academy.seminar11.thread;
+package backend.academy.seminar12.thread;
 
-import backend.academy.seminar11.utils.ThreadUtils;
+import backend.academy.seminar12.utils.ThreadUtils;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.DisplayName;

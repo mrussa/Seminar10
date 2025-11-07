@@ -1,4 +1,4 @@
-package backend.academy.seminar11.thread;
+package backend.academy.seminar12.thread;
 
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;

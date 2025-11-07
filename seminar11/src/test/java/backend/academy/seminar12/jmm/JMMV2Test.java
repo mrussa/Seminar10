@@ -1,8 +1,9 @@
-package backend.academy.seminar11.jmm;
+package backend.academy.seminar12.jmm;
 
 import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.SneakyThrows;
@@ -14,35 +15,37 @@ import org.junit.jupiter.api.Test;
 
 @Log4j2
 @Disabled // отключен для прохождения пайплайна
-public class JMMTest {
+public class JMMV2Test {
 
-    private static final int MAX_ATTEMPTS = 1_000;
+    private static final int MAX_ATTEMPTS = 100_000;
 
     @Test
     @SneakyThrows
     @DisplayName("Пример низкоуровневых оптимизаций")
-    void test() {
-        @Data
-        class Tuple {
+    void test0() {
+        doTest(MAX_ATTEMPTS, DataHolderV1::new);
+    }
 
-            int x;
-            int y;
+    @Test
+    @SneakyThrows
+    @DisplayName("Использование volatile")
+    void test1() {
+        doTest(MAX_ATTEMPTS, DataHolderV2::new);
+    }
 
-        }
-
-        var times = MAX_ATTEMPTS;
-
-        var results = new Tuple[times];
+    @SneakyThrows
+    private static void doTest(int times, Supplier<DataHolder> holderSupplier) {
+        var results = new Result[times];
         for (int i = 0; i < times; i++) {
-            results[i] = new Tuple();
+            results[i] = new Result();
         }
 
         while (--times >= 0) {
             var latch = new CountDownLatch(1);
-            var holder = new DataHolder();
+            var holder = holderSupplier.get();
 
             final var index = times;
-            Thread.ofPlatform()
+            var t1 = Thread.ofPlatform()
                 .start(() -> {
                     try {
                         latch.await();
@@ -51,7 +54,7 @@ public class JMMTest {
                     }
                     results[index].setX(holder.getX());
                 });
-            Thread.ofPlatform()
+            var t2 = Thread.ofPlatform()
                 .start(() -> {
                     try {
                         latch.await();
@@ -62,7 +65,8 @@ public class JMMTest {
                 });
 
             latch.countDown();
-            Thread.sleep(100);
+            t1.join();
+            t2.join();
         }
 
         // Работает на MacOS, graalvm-jdk-21
@@ -75,16 +79,53 @@ public class JMMTest {
         log.info("Тест выполнен {} раз, полученные в итоге результаты: {}", MAX_ATTEMPTS, actualResults);
     }
 
-    private static class DataHolder {
+    @Data
+    private static class Result {
+
+        int x = -1;
+        int y = -1;
+
+    }
+
+    private interface DataHolder {
+
+        int getX();
+
+        int getY();
+
+    }
+
+    private static class DataHolderV1 implements DataHolder {
 
         private int x; // 0
         private int y; // 0
 
+        @Override
         public int getY() {
             x = 1;
             return y;
         }
 
+        @Override
+        public int getX() {
+            y = 1;
+            return x;
+        }
+
+    }
+
+    private static class DataHolderV2 implements DataHolder {
+
+        private volatile int x; // 0
+        private volatile int y; // 0
+
+        @Override
+        public int getY() {
+            x = 1;
+            return y;
+        }
+
+        @Override
         public int getX() {
             y = 1;
             return x;
