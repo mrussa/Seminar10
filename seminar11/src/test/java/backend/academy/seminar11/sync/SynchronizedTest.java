@@ -38,8 +38,7 @@ public class SynchronizedTest {
                 .start(() -> doTest(latch, counter)));
 
         latch.countDown();
-        ThreadUtils.sleepSafe(5_000);
-        // sleep(1_000);
+        ThreadUtils.sleepSafe(1_000);
 
         log.info("Значение счетчика: {}", counter.getValue());
         assertEquals(counter.getMaxValue(), counter.getValue());
