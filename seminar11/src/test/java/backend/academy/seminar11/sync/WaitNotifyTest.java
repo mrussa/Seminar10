@@ -1,6 +1,6 @@
-package backend.academy.seminar12.sync;
+package backend.academy.seminar11.sync;
 
-import backend.academy.seminar12.utils.ThreadUtils;
+import backend.academy.seminar11.utils.ThreadUtils;
 import java.util.stream.IntStream;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
