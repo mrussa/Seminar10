@@ -79,9 +79,9 @@
         <module>seminar1-composition</module>
         <module>seminar1-oop</module>
         <module>seminar2</module>
-<!--        <module>seminar3</module>-->
-<!--        <module>seminar3-record</module>-->
-<!--        <module>seminar3-sealed</module>-->
+        <!--        <module>seminar3</module>-->
+        <!--        <module>seminar3-record</module>-->
+        <!--        <module>seminar3-sealed</module>-->
         <module>seminar4</module>
         <module>seminar5-api</module>
         <module>seminar5-arrays</module>
@@ -90,13 +90,13 @@
         <module>seminar7</module>
         <module>seminar8</module>
         <module>seminar9</module>
-<!--        <module>seminar10</module>-->
-<!--        <module>seminar11</module>-->
-<!--        <module>seminar12</module>-->
-<!--        <module>seminar13</module>-->
-<!--        <module>seminar14</module>-->
-<!--        <module>seminar14-example</module>-->
-<!--        <module>seminar15</module>-->
+        <!--        <module>seminar10</module>-->
+        <module>seminar11</module>
+        <!--        <module>seminar12</module>-->
+        <!--        <module>seminar13</module>-->
+        <!--        <module>seminar14</module>-->
+        <!--        <module>seminar14-example</module>-->
+        <!--        <module>seminar15</module>-->
     </modules>
 
     <dependencyManagement>
