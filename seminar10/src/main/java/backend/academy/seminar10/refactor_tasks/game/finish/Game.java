@@ -115,10 +115,11 @@ public class Game {
     }
 
     private WordBank.Theme questionCategoryForPlayer(PlayerState player) {
-        return switch (player.place) {
-            case 0, 4, 8 -> WordBank.Theme.POP;
-            case 1, 5, 9 -> WordBank.Theme.SCIENCE;
-            case 2, 6, 10 -> WordBank.Theme.SPORT;
+        int positionIndex = player.place % 4;
+        return switch (positionIndex) {
+            case 0 -> WordBank.Theme.POP;
+            case 1 -> WordBank.Theme.SCIENCE;
+            case 2 -> WordBank.Theme.SPORT;
             default -> WordBank.Theme.ROCK;
         };
     }
