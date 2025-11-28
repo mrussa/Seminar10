@@ -13,7 +13,7 @@ public class Game {
     private final List<PlayerState> players;
     private final WordBank wordBank;
 
-    private PlayerState player;
+    private PlayerState currentPlayer;
 
     public Game(Set<String> playerNames, int dummyAnswer, WordBank wordBank) {
         if (playerNames.size() < 2) {
@@ -22,7 +22,7 @@ public class Game {
         this.wordBank = wordBank;
         this.dummyAnswer = dummyAnswer;
         this.players = playerNames.stream().map(PlayerState::new).toList();
-        this.player = this.players.get(0);
+        this.currentPlayer = this.players.get(0);
     }
 
     public boolean roll(int dice) {
@@ -30,34 +30,34 @@ public class Game {
             throw new IllegalStateException("Cannot roll dice at this step");
         }
 
-        System.out.println(player.name + " is the current player");
+        System.out.println(currentPlayer.name + " is the current player");
         System.out.println("They have rolled a " + dice);
 
         boolean freedFromPenalty = attemptToFree(dice);
         if (freedFromPenalty) {
-            System.out.println(player.name + " is getting out of the penalty box");
+            System.out.println(currentPlayer.name + " is getting out of the penalty box");
         }
 
-        if (player.state == PlayerState.State.PENALTY) {
-            System.out.println(player.name + " is not getting out of the penalty box");
+        if (currentPlayer.state == PlayerState.State.PENALTY) {
+            System.out.println(currentPlayer.name + " is not getting out of the penalty box");
 
             nextPlayer();
             return true;
         }
 
-        player.place = (player.place + dice) % BOARD_SIZE;
-        System.out.println(player.name + "'s new location is " + player.place);
+        currentPlayer.place = (currentPlayer.place + dice) % BOARD_SIZE;
+        System.out.println(currentPlayer.name + "'s new location is " + currentPlayer.place);
         step = Step.QUESTION;
         return false;
     }
 
     private boolean attemptToFree(int dice) {
-        if (player.state != PlayerState.State.PENALTY) {
+        if (currentPlayer.state != PlayerState.State.PENALTY) {
             return false;
         }
 
         if (dice % 2 != 0) {
-            player.state = PlayerState.State.FREE;
+            currentPlayer.state = PlayerState.State.FREE;
             return true;
         }
         return false;
@@ -68,7 +68,7 @@ public class Game {
             throw new IllegalStateException("Cannot answer before rolling dice");
         }
 
-        if (player.state != PlayerState.State.FREE) {
+        if (currentPlayer.state != PlayerState.State.FREE) {
             throw new IllegalStateException("Cannot answer from penalty box");
         }
 
@@ -81,14 +81,14 @@ public class Game {
     private boolean isWinningAnswer(int userAnswer) {
         if (userAnswer == dummyAnswer) {
             System.out.println("Question was incorrectly answered");
-            System.out.println(player.name + " was sent to the penalty box");
-            player.state = PlayerState.State.PENALTY;
+            System.out.println(currentPlayer.name + " was sent to the penalty box");
+            currentPlayer.state = PlayerState.State.PENALTY;
             return false;
         } else {
             System.out.println("Answer was correct!!!!");
-            player.purse++;
-            System.out.println(player.name + " now has " + player.purse + " Gold Coins.");
-            return player.purse == WINNING_PURSE;
+            currentPlayer.purse++;
+            System.out.println(currentPlayer.name + " now has " + currentPlayer.purse + " Gold Coins.");
+            return currentPlayer.purse == WINNING_PURSE;
         }
 
     }
@@ -98,7 +98,7 @@ public class Game {
             throw new IllegalStateException("Cannot ask question at this step");
         }
 
-        WordBank.Theme category = questionCategoryForPlayer(player);
+        WordBank.Theme category = questionCategoryForPlayer(currentPlayer);
         System.out.println("The category is " + category);
         String question = wordBank.question(category);
         System.out.println(question);
@@ -106,11 +106,11 @@ public class Game {
     }
 
     private void nextPlayer() {
-        int index = players.indexOf(player);
+        int index = players.indexOf(currentPlayer);
         if (index != (players.size() - 1)) {
-            player = players.get(index + 1);
+            currentPlayer= players.get(index + 1);
         } else {
-            player = players.get(0);
+            currentPlayer= players.get(0);
         }
     }
 
