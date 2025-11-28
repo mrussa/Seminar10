@@ -1,29 +1,34 @@
 package backend.academy.seminar10.refactor_tasks.game;
 
-import java.util.LinkedList;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class OneTimeWordBank implements WordBank {
-    private final LinkedList<String> popQuestions = new LinkedList<>();
-    private final LinkedList<String> scienceQuestions = new LinkedList<>();
-    private final LinkedList<String> sportsQuestions = new LinkedList<>();
-    private final LinkedList<String> rockQuestions = new LinkedList<>();
 
-    public OneTimeWordBank() {
-        for (int i = 0; i < 50; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast("Rock Question " + i);
+    private final Map<Theme, Deque<String>> questionsByTheme = new EnumMap<>(Theme.class);
+
+    public OneTimeWordBank(int questionsPerTheme) {
+        questionsByTheme.put(Theme.POP, new ArrayDeque<>());
+        questionsByTheme.put(Theme.SCIENCE, new ArrayDeque<>());
+        questionsByTheme.put(Theme.SPORT, new ArrayDeque<>());
+        questionsByTheme.put(Theme.ROCK, new ArrayDeque<>());
+
+        for (int i = 0; i < questionsPerTheme; i++) {
+            questionsByTheme.get(Theme.POP).addLast("Pop Question " + i);
+            questionsByTheme.get(Theme.SCIENCE).addLast("Science Question " + i);
+            questionsByTheme.get(Theme.SPORT).addLast("Sports Question " + i);
+            questionsByTheme.get(Theme.ROCK).addLast("Rock Question " + i);
         }
     }
 
     @Override
     public String question(Theme theme) {
-        return switch (theme) {
-            case POP -> popQuestions.removeFirst();
-            case SCIENCE -> scienceQuestions.removeFirst();
-            case SPORT -> sportsQuestions.removeFirst();
-            case ROCK -> rockQuestions.removeFirst();
-        };
-    }
+            Deque<String> questions = questionsByTheme.get(theme);
+            if (questions == null || questions.isEmpty()) {
+                throw new IllegalStateException("no more questions for theme " + theme);
+            }
+            return questions.removeFirst();
+        }
 }
