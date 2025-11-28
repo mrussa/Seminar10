@@ -62,24 +62,24 @@ public class Game {
         //  чтобы гарантировать правильный порядок использования методов
         askQuestion();
 
-        boolean winConditions;
+        boolean isWinningAnswer;
         if (userAnswer == dummyAnswer) {
             // TODO: "обработка" (информирование игроков) результатов работы игровой сессии должны происходить "наверху"
             //  для этого опять возвращаемся к состоянию (возвращаемому типу)
             System.out.println("Question was incorrectly answered");
             System.out.println(player.name + " was sent to the penalty box");
             player.state = PlayerState.State.PENALTY;
-            winConditions = false;
+            isWinningAnswer = false;
         } else {
             System.out.println("Answer was correct!!!!");
             player.purse++;
             System.out.println(player.name + " now has " + player.purse + " Gold Coins.");
 
-            winConditions = player.purse == 6;
+            isWinningAnswer = player.purse == 6;
         }
 
         nextPlayer();
-        return winConditions;
+        return isWinningAnswer;
     }
 
     private void askQuestion() {
