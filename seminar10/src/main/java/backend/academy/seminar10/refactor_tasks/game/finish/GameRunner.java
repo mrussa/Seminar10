@@ -11,9 +11,11 @@ public class GameRunner {
     private static final int BOUND_MIN = 1;
     private static final int BOUND_MAX = 5;
 
+    private static final int QUESTIONS_PER_THEME = 50;
+
     public static void main(String[] args) {
 
-        Game game = new Game(Set.of("Chet", "Pat", "Sue"), DUMMY_ANSWER, new OneTimeWordBank());
+        Game game = new Game(Set.of("Chet", "Pat", "Sue"), DUMMY_ANSWER, new OneTimeWordBank(QUESTIONS_PER_THEME));
 
         Random rand = new Random();
         boolean winner = false;
