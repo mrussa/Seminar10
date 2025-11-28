@@ -3,7 +3,7 @@ package backend.academy.seminar10.refactor_tasks.prime_generator;
 public class PrimeGenerator {
     public int[] generate(int count) {
         if (count <= 0) {
-            return new int[0];
+            throw new IllegalArgumentException("count must be greater than 0");
         }
 
         int[] primes = new int[count];
