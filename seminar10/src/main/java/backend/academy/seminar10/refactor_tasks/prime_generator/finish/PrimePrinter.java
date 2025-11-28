@@ -26,25 +26,33 @@ public class PrimePrinter {
         while (pageOffset < primes.length) {
             decorateHeader(inputStream, primes, pagenumber);
 
-            for (int rowOffset = pageOffset; rowOffset < pageOffset + rows; rowOffset++) {
-                if (rowOffset >= primes.length) {
-                    break;
-                }
+            printPage(inputStream, primes, pageOffset);
 
-                for (int column = 0; column < columns; column++) {
-                    int index = rowOffset + column * rows;
-                    if (index >= primes.length) {
-                        break;
-                    }
-                    inputStream.printf("%10d", primes[index]);
-                }
-                inputStream.println();
-            }
             footerDecorator.accept(inputStream);
 
             pagenumber++;
             pageOffset += rows * columns;
         }
+    }
+
+    private void printPage(PrintStream inputStream, int[] primes, int pageOffset) {
+        for (int rowOffset = pageOffset; rowOffset < pageOffset + rows; rowOffset++) {
+            if (rowOffset >= primes.length) {
+                break;
+            }
+            printRow(inputStream, primes, rowOffset);
+        }
+    }
+
+    private void printRow(PrintStream inputStream, int[] primes, int rowOffset) {
+        for (int column = 0; column < columns; column++) {
+            int index = rowOffset + column * rows;
+            if (index >= primes.length) {
+                break;
+            }
+            inputStream.printf("%10d", primes[index]);
+        }
+        inputStream.println();
     }
 
     private void decorateFooter(PrintStream inputStream) {
