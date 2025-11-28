@@ -16,20 +16,29 @@ public class PlayerState {
     public int getPurse() {
         return purse;
     }
-    public void setPurse(int purse) {
-        this.purse = purse;
-    }
+
     public int getPlace() {
         return place;
     }
-    public void setPlace(int place) {
-        this.place = place;
-    }
+
     public State getState() {
         return state;
     }
-    public void setState(State state) {
-        this.state = state;
+
+    public void move(int steps, int boardSize) {
+        place = (place + steps) % boardSize;
+    }
+
+    public void addCoin() {
+        purse++;
+    }
+
+    public void sendToPenalty() {
+        state = State.PENALTY;
+    }
+
+    public void releaseFromPenalty() {
+        state = State.FREE;
     }
 
     public enum State {PENALTY, FREE}

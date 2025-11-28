@@ -27,7 +27,7 @@ public class OneTimeWordBank implements WordBank {
     public String question(Theme theme) {
             Deque<String> questions = questionsByTheme.get(theme);
             if (questions == null || questions.isEmpty()) {
-                throw new IllegalStateException("no more questions for theme " + theme);
+                throw new IllegalStateException("No more questions for theme " + theme);
             }
             return questions.removeFirst();
         }
