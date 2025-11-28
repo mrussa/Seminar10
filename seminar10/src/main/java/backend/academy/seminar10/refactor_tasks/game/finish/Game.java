@@ -7,12 +7,6 @@ public class Game {
     private static final int BOARD_SIZE = 12;
     private static final int WINNING_PURSE = 6;
 
-    public enum Step {
-        ROLL,
-        QUESTION,
-        ANSWER
-    }
-
     private Step step = Step.ROLL;
 
     private final int dummyAnswer;
