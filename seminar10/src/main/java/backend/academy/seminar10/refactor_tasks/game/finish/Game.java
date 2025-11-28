@@ -78,13 +78,13 @@ public class Game {
             throw new IllegalStateException("Cannot answer from penalty box");
         }
 
-        boolean winConditions = winConditions(userAnswer);
+        boolean isWinningAnswer = isWinningAnswer(userAnswer);
         nextPlayer();
         step = Step.ROLL;
-        return winConditions;
+        return isWinningAnswer;
     }
 
-    private boolean winConditions(int userAnswer) {
+    private boolean isWinningAnswer(int userAnswer) {
         if (userAnswer == dummyAnswer) {
             System.out.println("Question was incorrectly answered");
             System.out.println(player.name + " was sent to the penalty box");
